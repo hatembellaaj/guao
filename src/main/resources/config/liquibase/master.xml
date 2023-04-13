@@ -17,11 +17,15 @@
     <include file="config/liquibase/changelog/20230413203629_added_entity_Examen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230413204644_added_entity_Absence.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230413205455_added_entity_Note.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230413222253_added_entity_Inscrption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230413223553_added_entity_Paiement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20230413200720_added_entity_constraints_Eleve.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230413203629_added_entity_constraints_Examen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230413204644_added_entity_constraints_Absence.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230413205455_added_entity_constraints_Note.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230413222253_added_entity_constraints_Inscrption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230413223553_added_entity_constraints_Paiement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

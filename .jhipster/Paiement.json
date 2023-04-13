@@ -1,0 +1,47 @@
+{
+  "changelogDate": "20230413223553",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "montant",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modepaiement",
+      "fieldType": "emodepaiement",
+      "fieldValues": "CHEQUE,ESPECE,TRAITE"
+    },
+    {
+      "fieldName": "numcheque",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datepaiement",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numrecu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idinscription",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Paiement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "eleve",
+      "relationshipName": "eleve",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"]
+    }
+  ],
+  "service": "serviceClass"
+}

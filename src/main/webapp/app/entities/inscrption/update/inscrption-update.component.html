@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-inscrption-heading" data-cy="InscrptionCreateUpdateHeading">Create or edit a Inscrption</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateinscription">Dateinscription</label>
+          <div class="input-group">
+            <input
+              id="field_dateinscription"
+              data-cy="dateinscription"
+              type="text"
+              class="form-control"
+              name="dateinscription"
+              ngbDatepicker
+              #dateinscriptionDp="ngbDatepicker"
+              formControlName="dateinscription"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateinscriptionDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateinscription')!.invalid &&
+              (editForm.get('dateinscription')!.dirty || editForm.get('dateinscription')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('dateinscription')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_tarifinscription">Tarifinscription</label>
+          <input
+            type="number"
+            class="form-control"
+            name="tarifinscription"
+            id="field_tarifinscription"
+            data-cy="tarifinscription"
+            formControlName="tarifinscription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_classe">Classe</label>
+          <select
+            class="form-control"
+            id="field_classe"
+            data-cy="classe"
+            name="classe"
+            formControlName="classe"
+            [compareWith]="compareClasse"
+          >
+            <option *ngIf="!editForm.get('classe')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="classeOption" *ngFor="let classeOption of classesSharedCollection">{{ classeOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['classe'])!.invalid && (editForm.get(['classe'])!.dirty || editForm.get(['classe'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['classe'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

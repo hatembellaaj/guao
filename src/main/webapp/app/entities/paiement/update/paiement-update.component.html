@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-paiement-heading" data-cy="PaiementCreateUpdateHeading">Create or edit a Paiement</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('montant')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('montant')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_modepaiement">Modepaiement</label>
+          <select class="form-control" name="modepaiement" formControlName="modepaiement" id="field_modepaiement" data-cy="modepaiement">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let emodepaiement of emodepaiementValues" [value]="emodepaiement">emodepaiement</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_numcheque">Numcheque</label>
+          <input type="text" class="form-control" name="numcheque" id="field_numcheque" data-cy="numcheque" formControlName="numcheque" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_datepaiement">Datepaiement</label>
+          <div class="input-group">
+            <input
+              id="field_datepaiement"
+              data-cy="datepaiement"
+              type="text"
+              class="form-control"
+              name="datepaiement"
+              ngbDatepicker
+              #datepaiementDp="ngbDatepicker"
+              formControlName="datepaiement"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datepaiementDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('datepaiement')!.invalid && (editForm.get('datepaiement')!.dirty || editForm.get('datepaiement')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('datepaiement')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_numrecu">Numrecu</label>
+          <input type="text" class="form-control" name="numrecu" id="field_numrecu" data-cy="numrecu" formControlName="numrecu" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_idinscription">Idinscription</label>
+          <input
+            type="text"
+            class="form-control"
+            name="idinscription"
+            id="field_idinscription"
+            data-cy="idinscription"
+            formControlName="idinscription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_eleve">Eleve</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option *ngIf="!editForm.get('eleve')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['eleve'])!.invalid && (editForm.get(['eleve'])!.dirty || editForm.get(['eleve'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['eleve'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
