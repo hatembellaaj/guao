@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="note">
+      <h2 data-cy="noteDetailsHeading"><span>Note</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ note.id }}</span>
+        </dd>
+        <dt><span>Noteexamen</span></dt>
+        <dd>
+          <span>{{ note.noteexamen }}</span>
+        </dd>
+        <dt><span>Remarque</span></dt>
+        <dd>
+          <span>{{ note.remarque }}</span>
+        </dd>
+        <dt><span>Eleve</span></dt>
+        <dd>
+          <div *ngIf="note.eleve">
+            <a [routerLink]="['/eleve', note.eleve.id, 'view']">{{ note.eleve.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Examen</span></dt>
+        <dd>
+          <div *ngIf="note.examen">
+            <a [routerLink]="['/examen', note.examen.id, 'view']">{{ note.examen.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/note', note.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

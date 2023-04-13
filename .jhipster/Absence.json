@@ -1,0 +1,33 @@
+{
+  "changelogDate": "20230413204644",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateabsence",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "justifie",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Absence",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "eleve",
+      "relationshipName": "eleve",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"]
+    }
+  ],
+  "service": "serviceClass"
+}

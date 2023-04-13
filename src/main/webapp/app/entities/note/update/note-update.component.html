@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-note-heading" data-cy="NoteCreateUpdateHeading">Create or edit a Note</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_noteexamen">Noteexamen</label>
+          <input
+            type="number"
+            class="form-control"
+            name="noteexamen"
+            id="field_noteexamen"
+            data-cy="noteexamen"
+            formControlName="noteexamen"
+          />
+          <div *ngIf="editForm.get('noteexamen')!.invalid && (editForm.get('noteexamen')!.dirty || editForm.get('noteexamen')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('noteexamen')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('noteexamen')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_remarque">Remarque</label>
+          <input type="text" class="form-control" name="remarque" id="field_remarque" data-cy="remarque" formControlName="remarque" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_eleve">Eleve</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option *ngIf="!editForm.get('eleve')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['eleve'])!.invalid && (editForm.get(['eleve'])!.dirty || editForm.get(['eleve'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['eleve'])?.errors?.required"> This field is required. </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_examen">Examen</label>
+          <select
+            class="form-control"
+            id="field_examen"
+            data-cy="examen"
+            name="examen"
+            formControlName="examen"
+            [compareWith]="compareExamen"
+          >
+            <option *ngIf="!editForm.get('examen')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="examenOption" *ngFor="let examenOption of examenSharedCollection">{{ examenOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['examen'])!.invalid && (editForm.get(['examen'])!.dirty || editForm.get(['examen'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['examen'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

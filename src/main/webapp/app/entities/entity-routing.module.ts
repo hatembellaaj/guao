@@ -19,6 +19,21 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Matieres' },
         loadChildren: () => import('./matiere/matiere.module').then(m => m.MatiereModule),
       },
+      {
+        path: 'examen',
+        data: { pageTitle: 'Examen' },
+        loadChildren: () => import('./examen/examen.module').then(m => m.ExamenModule),
+      },
+      {
+        path: 'absence',
+        data: { pageTitle: 'Absences' },
+        loadChildren: () => import('./absence/absence.module').then(m => m.AbsenceModule),
+      },
+      {
+        path: 'note',
+        data: { pageTitle: 'Notes' },
+        loadChildren: () => import('./note/note.module').then(m => m.NoteModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

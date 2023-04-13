@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-absence-heading" data-cy="AbsenceCreateUpdateHeading">Create or edit a Absence</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateabsence">Dateabsence</label>
+          <div class="input-group">
+            <input
+              id="field_dateabsence"
+              data-cy="dateabsence"
+              type="text"
+              class="form-control"
+              name="dateabsence"
+              ngbDatepicker
+              #dateabsenceDp="ngbDatepicker"
+              formControlName="dateabsence"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateabsenceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="editForm.get('dateabsence')!.invalid && (editForm.get('dateabsence')!.dirty || editForm.get('dateabsence')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('dateabsence')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_justifie">Justifie</label>
+          <input type="checkbox" class="form-check" name="justifie" id="field_justifie" data-cy="justifie" formControlName="justifie" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_eleve">Eleve</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option *ngIf="!editForm.get('eleve')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['eleve'])!.invalid && (editForm.get(['eleve'])!.dirty || editForm.get(['eleve'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['eleve'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
