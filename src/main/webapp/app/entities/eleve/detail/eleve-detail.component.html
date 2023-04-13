@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eleve">
+      <h2 data-cy="eleveDetailsHeading"><span>Eleve</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ eleve.id }}</span>
+        </dd>
+        <dt><span>Matricule</span></dt>
+        <dd>
+          <span>{{ eleve.matricule }}</span>
+        </dd>
+        <dt><span>Typedepaiement</span></dt>
+        <dd>
+          <span>{{ eleve.typedepaiement }}</span>
+        </dd>
+        <dt><span>Sexe</span></dt>
+        <dd>
+          <span>{{ eleve.sexe }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ eleve.nom }}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+          <span>{{ eleve.prenom }}</span>
+        </dd>
+        <dt><span>Datedenaissance</span></dt>
+        <dd>
+          <span>{{ eleve.datedenaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ eleve.email }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ eleve.adresse }}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+          <span>{{ eleve.telephone }}</span>
+        </dd>
+        <dt><span>Codepostale</span></dt>
+        <dd>
+          <span>{{ eleve.codepostale }}</span>
+        </dd>
+        <dt><span>Ville</span></dt>
+        <dd>
+          <span>{{ eleve.ville }}</span>
+        </dd>
+        <dt><span>Pays</span></dt>
+        <dd>
+          <span>{{ eleve.pays }}</span>
+        </dd>
+        <dt><span>Classe</span></dt>
+        <dd>
+          <div *ngIf="eleve.classe">
+            <a [routerLink]="['/classe', eleve.classe.id, 'view']">{{ eleve.classe.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/eleve', eleve.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

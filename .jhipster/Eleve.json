@@ -1,0 +1,71 @@
+{
+  "changelogDate": "20230413200720",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "typedepaiement",
+      "fieldType": "etypedepaiement",
+      "fieldValues": "CHEQUE,ESPECE,TRAITE"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "esexe",
+      "fieldValues": "HOMME,FEMME"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datedenaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codepostale",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pays",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Eleve",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "classe",
+      "relationshipName": "classe",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

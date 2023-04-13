@@ -1,0 +1,21 @@
+{
+  "changelogDate": "20230413195633",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nomclasse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nombreeleves",
+      "fieldType": "Integer"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Classe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
