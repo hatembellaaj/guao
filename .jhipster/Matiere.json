@@ -1,0 +1,29 @@
+{
+  "changelogDate": "20230413201706",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nommatiere",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "coefficient",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreheure",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreexamen",
+      "fieldType": "Integer"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Matiere",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}
