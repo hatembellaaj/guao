@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-eleve-heading" data-cy="EleveCreateUpdateHeading">Create or edit a Eleve</h2>
+      <h2 id="jhi-eleve-heading" data-cy="EleveCreateUpdateHeading">Créer ou modifier un élève</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_typedepaiement">Typedepaiement</label>
+          <label class="form-label" for="field_typedepaiement">Type de paiement</label>
           <select
             class="form-control"
             name="typedepaiement"
@@ -29,7 +29,7 @@
             data-cy="typedepaiement"
           >
             <option [ngValue]="null"></option>
-            <option *ngFor="let etypedepaiement of etypedepaiementValues" [value]="etypedepaiement">etypedepaiement</option>
+            <option *ngFor="let etypedepaiement of etypedepaiementValues" [value]="etypedepaiement">{{ etypedepaiement }}</option>
           </select>
         </div>
 
@@ -37,7 +37,7 @@
           <label class="form-label" for="field_sexe">Sexe</label>
           <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
             <option [ngValue]="null"></option>
-            <option *ngFor="let esexe of esexeValues" [value]="esexe">esexe</option>
+            <option *ngFor="let esexe of esexeValues" [value]="esexe">{{ esexe }}</option>
           </select>
         </div>
 
@@ -55,7 +55,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_datedenaissance">Datedenaissance</label>
+          <label class="form-label" for="field_datedenaissance">Date de naissance</label>
           <div class="input-group">
             <input
               id="field_datedenaissance"
@@ -89,7 +89,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_codepostale">Codepostale</label>
+          <label class="form-label" for="field_codepostale">Code postale</label>
           <input
             type="text"
             class="form-control"
@@ -121,14 +121,14 @@
             [compareWith]="compareClasse"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="classeOption" *ngFor="let classeOption of classesSharedCollection">{{ classeOption.id }}</option>
+            <option [ngValue]="classeOption" *ngFor="let classeOption of classesSharedCollection">{{ classeOption.nomclasse }}</option>
           </select>
         </div>
       </div>
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
         </button>
 
         <button
@@ -138,7 +138,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
         </button>
       </div>
     </form>

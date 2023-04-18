@@ -12,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_nomclasse">Nomclasse</label>
+          <label class="form-label" for="field_nomclasse">Nom classe</label>
           <input type="text" class="form-control" name="nomclasse" id="field_nomclasse" data-cy="nomclasse" formControlName="nomclasse" />
           <div *ngIf="editForm.get('nomclasse')!.invalid && (editForm.get('nomclasse')!.dirty || editForm.get('nomclasse')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('nomclasse')?.errors?.required"> This field is required. </small>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_nombreeleves">Nombreeleves</label>
+          <label class="form-label" for="field_nombreeleves">Nombre eleves</label>
           <input
             type="number"
             class="form-control"

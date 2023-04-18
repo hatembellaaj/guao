@@ -44,7 +44,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="typedepaiement">
+          <!--th scope="col" jhiSortBy="typedepaiement">
             <div class="d-flex">
               <span>Typedepaiement</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -55,7 +55,7 @@
               <span>Sexe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th-->
           <th scope="col" jhiSortBy="nom">
             <div class="d-flex">
               <span>Nom</span>
@@ -68,7 +68,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="datedenaissance">
+          <!--th scope="col" jhiSortBy="datedenaissance">
             <div class="d-flex">
               <span>Datedenaissance</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -109,7 +109,7 @@
               <span>Pays</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th-->
           <th scope="col" jhiSortBy="classe.id">
             <div class="d-flex">
               <span>Classe</span>
@@ -125,17 +125,17 @@
             <a [routerLink]="['/eleve', eleve.id, 'view']">{{ eleve.id }}</a>
           </td>
           <td>{{ eleve.matricule }}</td>
-          <td>{{ eleve.typedepaiement }}</td>
-          <td>{{ eleve.sexe }}</td>
+          <!--td>{{ eleve.typedepaiement }}</td>
+          <td>{{ eleve.sexe }}</td-->
           <td>{{ eleve.nom }}</td>
           <td>{{ eleve.prenom }}</td>
-          <td>{{ eleve.datedenaissance | formatMediumDate }}</td>
+          <!--td>{{ eleve.datedenaissance | formatMediumDate }}</td>
           <td>{{ eleve.email }}</td>
           <td>{{ eleve.adresse }}</td>
           <td>{{ eleve.telephone }}</td>
           <td>{{ eleve.codepostale }}</td>
           <td>{{ eleve.ville }}</td>
-          <td>{{ eleve.pays }}</td>
+          <td>{{ eleve.pays }}</td-->
           <td>
             <div *ngIf="eleve.classe">
               <a [routerLink]="['/classe', eleve.classe.id, 'view']">{{ eleve.classe.id }}</a>
