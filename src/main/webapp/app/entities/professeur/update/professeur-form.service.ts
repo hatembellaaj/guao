@@ -22,6 +22,7 @@ type ProfesseurFormGroupContent = {
   specialite: FormControl<IProfesseur['specialite']>;
   typecontrat: FormControl<IProfesseur['typecontrat']>;
   annecontrat: FormControl<IProfesseur['annecontrat']>;
+  user: FormControl<IProfesseur['user']>;
 };
 
 export type ProfesseurFormGroup = FormGroup<ProfesseurFormGroupContent>;
@@ -45,6 +46,9 @@ export class ProfesseurFormService {
       specialite: new FormControl(professeurRawValue.specialite),
       typecontrat: new FormControl(professeurRawValue.typecontrat),
       annecontrat: new FormControl(professeurRawValue.annecontrat),
+      user: new FormControl(professeurRawValue.user, {
+        validators: [Validators.required],
+      }),
     });
   }
 

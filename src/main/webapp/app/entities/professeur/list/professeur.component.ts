@@ -106,6 +106,7 @@ export class ProfesseurComponent implements OnInit {
     const queryObject = {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
+      eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
     };
     return this.professeurService.query(queryObject).pipe(tap(() => (this.isLoading = false)));

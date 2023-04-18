@@ -2,6 +2,7 @@ package com.guao.manager.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * A Professeur.
@@ -30,6 +31,11 @@ public class Professeur implements Serializable {
 
     @Column(name = "annecontrat")
     private String annecontrat;
+
+    @OneToOne(optional = false)
+    @NotNull
+    @JoinColumn(unique = true)
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -96,6 +102,19 @@ public class Professeur implements Serializable {
 
     public void setAnnecontrat(String annecontrat) {
         this.annecontrat = annecontrat;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Professeur user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

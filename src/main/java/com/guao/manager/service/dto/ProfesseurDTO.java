@@ -2,6 +2,7 @@ package com.guao.manager.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.guao.manager.domain.Professeur} entity.
@@ -18,6 +19,8 @@ public class ProfesseurDTO implements Serializable {
     private String typecontrat;
 
     private String annecontrat;
+
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -59,6 +62,14 @@ public class ProfesseurDTO implements Serializable {
         this.annecontrat = annecontrat;
     }
 
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -89,6 +100,7 @@ public class ProfesseurDTO implements Serializable {
             ", specialite='" + getSpecialite() + "'" +
             ", typecontrat='" + getTypecontrat() + "'" +
             ", annecontrat='" + getAnnecontrat() + "'" +
+            ", user=" + getUser() +
             "}";
     }
 }

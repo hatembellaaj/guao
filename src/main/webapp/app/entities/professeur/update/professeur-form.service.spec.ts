@@ -24,6 +24,7 @@ describe('Professeur Form Service', () => {
             specialite: expect.any(Object),
             typecontrat: expect.any(Object),
             annecontrat: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });
@@ -38,6 +39,7 @@ describe('Professeur Form Service', () => {
             specialite: expect.any(Object),
             typecontrat: expect.any(Object),
             annecontrat: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });

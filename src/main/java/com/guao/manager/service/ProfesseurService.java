@@ -89,6 +89,15 @@ public class ProfesseurService {
     }
 
     /**
+     * Get all the professeurs with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<ProfesseurDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return professeurRepository.findAllWithEagerRelationships(pageable).map(professeurMapper::toDto);
+    }
+
+    /**
      * Get one professeur by id.
      *
      * @param id the id of the entity.
@@ -97,7 +106,7 @@ public class ProfesseurService {
     @Transactional(readOnly = true)
     public Optional<ProfesseurDTO> findOne(Long id) {
         log.debug("Request to get Professeur : {}", id);
-        return professeurRepository.findById(id).map(professeurMapper::toDto);
+        return professeurRepository.findOneWithEagerRelationships(id).map(professeurMapper::toDto);
     }
 
     /**
