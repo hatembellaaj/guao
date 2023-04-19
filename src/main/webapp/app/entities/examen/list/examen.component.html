@@ -96,12 +96,12 @@
 
           <td>
             <div *ngIf="examen.matiere">
-              <a [routerLink]="['/matiere', examen.matiere.id, 'view']">{{ examen.matiere.id }}</a>
+              <a [routerLink]="['/matiere', examen.matiere.id, 'view']">{{ examen.matiere.nommatiere }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="examen.classe">
-              <a [routerLink]="['/classe', examen.classe.id, 'view']">{{ examen.classe.id }}</a>
+              <a [routerLink]="['/classe', examen.classe.id, 'view']">{{ examen.classe.nomclasse }}</a>
             </div>
           </td>
           <td class="text-end">

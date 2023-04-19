@@ -1,9 +1,16 @@
 package com.guao.manager.service;
 
+import com.guao.manager.domain.Classe;
 import com.guao.manager.domain.Examen;
+import com.guao.manager.repository.ClasseRepository;
 import com.guao.manager.repository.ExamenRepository;
+import com.guao.manager.repository.MatiereRepository;
+import com.guao.manager.service.dto.ClasseDTO;
 import com.guao.manager.service.dto.ExamenDTO;
+import com.guao.manager.service.dto.MatiereDTO;
+import com.guao.manager.service.mapper.ClasseMapper;
 import com.guao.manager.service.mapper.ExamenMapper;
+import com.guao.manager.service.mapper.MatiereMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +30,30 @@ public class ExamenService {
 
     private final ExamenRepository examenRepository;
 
+    private final ClasseRepository classeRepository;
+
+    private final MatiereRepository matiereRepository;
+
     private final ExamenMapper examenMapper;
 
-    public ExamenService(ExamenRepository examenRepository, ExamenMapper examenMapper) {
+    private final ClasseMapper classeMapper;
+
+    private final MatiereMapper matiereMapper;
+
+    public ExamenService(
+        ExamenRepository examenRepository,
+        ClasseRepository classeRepository,
+        ClasseMapper classeMapper,
+        MatiereRepository matiereRepository,
+        MatiereMapper matiereMapper,
+        ExamenMapper examenMapper
+    ) {
         this.examenRepository = examenRepository;
         this.examenMapper = examenMapper;
+        this.classeRepository = classeRepository;
+        this.classeMapper = classeMapper;
+        this.matiereMapper = matiereMapper;
+        this.matiereRepository = matiereRepository;
     }
 
     /**
@@ -85,7 +111,17 @@ public class ExamenService {
     @Transactional(readOnly = true)
     public Page<ExamenDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Examen");
-        return examenRepository.findAll(pageable).map(examenMapper::toDto);
+        Page<ExamenDTO> pedto = examenRepository.findAll(pageable).map(examenMapper::toDto);
+
+        for (int i = 0; i < pedto.getSize(); i++) pedto.forEach(e -> {
+            Optional<ClasseDTO> cdto = this.classeRepository.findById(e.getClasse().getId()).map(classeMapper::toDto);
+            e.setClasse(cdto.get());
+            Optional<MatiereDTO> mdto = this.matiereRepository.findById(e.getMatiere().getId()).map(matiereMapper::toDto);
+
+            e.setMatiere(mdto.get());
+        });
+
+        return pedto;
     }
 
     /**
