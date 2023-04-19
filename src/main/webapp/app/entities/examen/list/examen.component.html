@@ -93,6 +93,7 @@
           <td>{{ examen.valide }}</td>
           <td>{{ examen.date | formatMediumDate }}</td>
           <td>{{ examen.duree }}</td>
+
           <td>
             <div *ngIf="examen.matiere">
               <a [routerLink]="['/matiere', examen.matiere.id, 'view']">{{ examen.matiere.id }}</a>

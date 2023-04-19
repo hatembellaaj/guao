@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-absence-heading" data-cy="AbsenceCreateUpdateHeading">Create or edit a Absence</h2>
+      <h2 id="jhi-absence-heading" data-cy="AbsenceCreateUpdateHeading">Create or edit an Absence</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_dateabsence">Dateabsence</label>
+          <label class="form-label" for="field_dateabsence">Date d'absence</label>
           <div class="input-group">
             <input
               id="field_dateabsence"
@@ -54,7 +54,7 @@
           <label class="form-label" for="field_eleve">Eleve</label>
           <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
             <option *ngIf="!editForm.get('eleve')!.value" [ngValue]="null" selected></option>
-            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.id }}</option>
+            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.matricule }}</option>
           </select>
         </div>
         <div *ngIf="editForm.get(['eleve'])!.invalid && (editForm.get(['eleve'])!.dirty || editForm.get(['eleve'])!.touched)">

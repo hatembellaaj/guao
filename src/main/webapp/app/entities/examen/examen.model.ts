@@ -9,8 +9,8 @@ export interface IExamen {
   valide?: boolean | null;
   date?: dayjs.Dayjs | null;
   duree?: number | null;
-  matiere?: Pick<IMatiere, 'id'> | null;
-  classe?: Pick<IClasse, 'id'> | null;
+  matiere?: IMatiere | null;
+  classe?: IClasse | null;
 }
 
 export type NewExamen = Omit<IExamen, 'id'> & { id: null };
