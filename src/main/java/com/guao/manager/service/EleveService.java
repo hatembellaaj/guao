@@ -1,8 +1,12 @@
 package com.guao.manager.service;
 
 import com.guao.manager.domain.Eleve;
+import com.guao.manager.repository.ClasseRepository;
 import com.guao.manager.repository.EleveRepository;
+import com.guao.manager.service.dto.ClasseDTO;
 import com.guao.manager.service.dto.EleveDTO;
+import com.guao.manager.service.dto.MatiereDTO;
+import com.guao.manager.service.mapper.ClasseMapper;
 import com.guao.manager.service.mapper.EleveMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -25,9 +29,20 @@ public class EleveService {
 
     private final EleveMapper eleveMapper;
 
-    public EleveService(EleveRepository eleveRepository, EleveMapper eleveMapper) {
+    private final ClasseRepository classeRepository;
+
+    private final ClasseMapper classeMapper;
+
+    public EleveService(
+        EleveRepository eleveRepository,
+        EleveMapper eleveMapper,
+        ClasseRepository classeRepository,
+        ClasseMapper classeMapper
+    ) {
         this.eleveRepository = eleveRepository;
         this.eleveMapper = eleveMapper;
+        this.classeRepository = classeRepository;
+        this.classeMapper = classeMapper;
     }
 
     /**
@@ -85,7 +100,14 @@ public class EleveService {
     @Transactional(readOnly = true)
     public Page<EleveDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Eleves");
-        return eleveRepository.findAll(pageable).map(eleveMapper::toDto);
+        Page<EleveDTO> pedto = eleveRepository.findAll(pageable).map(eleveMapper::toDto);
+
+        for (int i = 0; i < pedto.getSize(); i++) pedto.forEach(e -> {
+            Optional<ClasseDTO> cdto = this.classeRepository.findById(e.getClasse().getId()).map(classeMapper::toDto);
+            e.setClasse(cdto.get());
+        });
+
+        return pedto;
     }
 
     /**

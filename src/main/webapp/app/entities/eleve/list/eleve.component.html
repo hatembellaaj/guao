@@ -138,7 +138,7 @@
           <td>{{ eleve.pays }}</td-->
           <td>
             <div *ngIf="eleve.classe">
-              <a [routerLink]="['/classe', eleve.classe.id, 'view']">{{ eleve.classe.id }}</a>
+              <a [routerLink]="['/classe', eleve.classe.id, 'view']">{{ eleve.classe.nomclasse }}</a>
             </div>
           </td>
           <td class="text-end">

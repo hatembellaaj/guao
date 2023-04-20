@@ -17,7 +17,7 @@ export interface IEleve {
   codepostale?: string | null;
   ville?: string | null;
   pays?: string | null;
-  classe?: Pick<IClasse, 'id'> | null;
+  classe?: IClasse | null;
 }
 
 export type NewEleve = Omit<IEleve, 'id'> & { id: null };
