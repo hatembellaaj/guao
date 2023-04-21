@@ -74,12 +74,14 @@
           <td>{{ note.remarque }}</td>
           <td>
             <div *ngIf="note.eleve">
-              <a [routerLink]="['/eleve', note.eleve.id, 'view']">{{ note.eleve.id }}</a>
+              <a [routerLink]="['/eleve', note.eleve.id, 'view']">{{ note.eleve.id }} {{ note.eleve!.nom }} {{ note.eleve!.prenom }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="note.examen">
-              <a [routerLink]="['/examen', note.examen.id, 'view']">{{ note.examen.id }}</a>
+              <a [routerLink]="['/examen', note.examen.id, 'view']"
+                >{{ note.examen.id }} {{ note.examen!.matiere!.nommatiere }} - ordre : {{ note.examen!.numexamen }}</a
+              >
             </div>
           </td>
           <td class="text-end">

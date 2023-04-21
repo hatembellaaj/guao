@@ -6,7 +6,7 @@ export interface IInscrption {
   dateinscription?: dayjs.Dayjs | null;
   commentaire?: string | null;
   tarifinscription?: number | null;
-  classe?: Pick<IClasse, 'id'> | null;
+  classe?: IClasse | null;
 }
 
 export type NewInscrption = Omit<IInscrption, 'id'> & { id: null };

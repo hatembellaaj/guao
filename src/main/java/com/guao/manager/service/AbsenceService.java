@@ -2,8 +2,13 @@ package com.guao.manager.service;
 
 import com.guao.manager.domain.Absence;
 import com.guao.manager.repository.AbsenceRepository;
+import com.guao.manager.repository.EleveRepository;
 import com.guao.manager.service.dto.AbsenceDTO;
+import com.guao.manager.service.dto.ClasseDTO;
+import com.guao.manager.service.dto.EleveDTO;
+import com.guao.manager.service.dto.MatiereDTO;
 import com.guao.manager.service.mapper.AbsenceMapper;
+import com.guao.manager.service.mapper.EleveMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +30,20 @@ public class AbsenceService {
 
     private final AbsenceMapper absenceMapper;
 
-    public AbsenceService(AbsenceRepository absenceRepository, AbsenceMapper absenceMapper) {
+    private final EleveRepository eleveRepository;
+
+    private final EleveMapper eleveMapper;
+
+    public AbsenceService(
+        AbsenceRepository absenceRepository,
+        EleveRepository eleveRepository,
+        EleveMapper eleveMapper,
+        AbsenceMapper absenceMapper
+    ) {
         this.absenceRepository = absenceRepository;
         this.absenceMapper = absenceMapper;
+        this.eleveMapper = eleveMapper;
+        this.eleveRepository = eleveRepository;
     }
 
     /**
@@ -85,7 +101,14 @@ public class AbsenceService {
     @Transactional(readOnly = true)
     public Page<AbsenceDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Absences");
-        return absenceRepository.findAll(pageable).map(absenceMapper::toDto);
+        Page<AbsenceDTO> padto = absenceRepository.findAll(pageable).map(absenceMapper::toDto);
+
+        for (int i = 0; i < padto.getSize(); i++) padto.forEach(e -> {
+            Optional<EleveDTO> edto = this.eleveRepository.findById(e.getEleve().getId()).map(eleveMapper::toDto);
+            e.setEleve(edto.get());
+        });
+
+        return padto;
     }
 
     /**

@@ -12,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_dateinscription">Dateinscription</label>
+          <label class="form-label" for="field_dateinscription">Date inscription</label>
           <div class="input-group">
             <input
               id="field_dateinscription"
@@ -51,7 +51,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_tarifinscription">Tarifinscription</label>
+          <label class="form-label" for="field_tarifinscription">Tarif inscription</label>
           <input
             type="number"
             class="form-control"
@@ -73,7 +73,7 @@
             [compareWith]="compareClasse"
           >
             <option *ngIf="!editForm.get('classe')!.value" [ngValue]="null" selected></option>
-            <option [ngValue]="classeOption" *ngFor="let classeOption of classesSharedCollection">{{ classeOption.id }}</option>
+            <option [ngValue]="classeOption" *ngFor="let classeOption of classesSharedCollection">{{ classeOption.nomclasse }}</option>
           </select>
         </div>
         <div *ngIf="editForm.get(['classe'])!.invalid && (editForm.get(['classe'])!.dirty || editForm.get(['classe'])!.touched)">

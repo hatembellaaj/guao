@@ -12,7 +12,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_noteexamen">Noteexamen</label>
+          <label class="form-label" for="field_noteexamen">Note examen</label>
           <input
             type="number"
             class="form-control"
@@ -38,7 +38,9 @@
           <label class="form-label" for="field_eleve">Eleve</label>
           <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
             <option *ngIf="!editForm.get('eleve')!.value" [ngValue]="null" selected></option>
-            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">{{ eleveOption.id }}</option>
+            <option [ngValue]="eleveOption" *ngFor="let eleveOption of elevesSharedCollection">
+              {{ eleveOption.matricule }} {{ eleveOption.nom }} {{ eleveOption.prenom }}
+            </option>
           </select>
         </div>
         <div *ngIf="editForm.get(['eleve'])!.invalid && (editForm.get(['eleve'])!.dirty || editForm.get(['eleve'])!.touched)">
@@ -56,7 +58,9 @@
             [compareWith]="compareExamen"
           >
             <option *ngIf="!editForm.get('examen')!.value" [ngValue]="null" selected></option>
-            <option [ngValue]="examenOption" *ngFor="let examenOption of examenSharedCollection">{{ examenOption.id }}</option>
+            <option [ngValue]="examenOption" *ngFor="let examenOption of examenSharedCollection">
+              {{ examenOption!.matiere!.nommatiere }} - ordre : {{ examenOption!.numexamen }}
+            </option>
           </select>
         </div>
         <div *ngIf="editForm.get(['examen'])!.invalid && (editForm.get(['examen'])!.dirty || editForm.get(['examen'])!.touched)">

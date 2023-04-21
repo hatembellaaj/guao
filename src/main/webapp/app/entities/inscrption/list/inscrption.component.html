@@ -75,7 +75,7 @@
           <td>{{ inscrption.tarifinscription }}</td>
           <td>
             <div *ngIf="inscrption.classe">
-              <a [routerLink]="['/classe', inscrption.classe.id, 'view']">{{ inscrption.classe.id }}</a>
+              <a [routerLink]="['/classe', inscrption.classe.id, 'view']">{{ inscrption.classe.nomclasse }}</a>
             </div>
           </td>
           <td class="text-end">

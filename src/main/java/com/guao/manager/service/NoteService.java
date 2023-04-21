@@ -1,8 +1,18 @@
 package com.guao.manager.service;
 
 import com.guao.manager.domain.Note;
+import com.guao.manager.repository.ClasseRepository;
+import com.guao.manager.repository.EleveRepository;
+import com.guao.manager.repository.ExamenRepository;
+import com.guao.manager.repository.MatiereRepository;
 import com.guao.manager.repository.NoteRepository;
+import com.guao.manager.service.dto.ClasseDTO;
+import com.guao.manager.service.dto.EleveDTO;
+import com.guao.manager.service.dto.ExamenDTO;
+import com.guao.manager.service.dto.MatiereDTO;
 import com.guao.manager.service.dto.NoteDTO;
+import com.guao.manager.service.mapper.EleveMapper;
+import com.guao.manager.service.mapper.ExamenMapper;
 import com.guao.manager.service.mapper.NoteMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -25,9 +35,28 @@ public class NoteService {
 
     private final NoteMapper noteMapper;
 
-    public NoteService(NoteRepository noteRepository, NoteMapper noteMapper) {
+    private final ExamenRepository examenRepository;
+
+    private final ExamenMapper examenMapper;
+
+    private final EleveRepository eleveRepository;
+
+    private final EleveMapper eleveMapper;
+
+    public NoteService(
+        NoteRepository noteRepository,
+        ExamenRepository examenRepository,
+        ExamenMapper examenMapper,
+        EleveRepository eleveRepository,
+        EleveMapper eleveMapper,
+        NoteMapper noteMapper
+    ) {
         this.noteRepository = noteRepository;
         this.noteMapper = noteMapper;
+        this.examenRepository = examenRepository;
+        this.examenMapper = examenMapper;
+        this.eleveMapper = eleveMapper;
+        this.eleveRepository = eleveRepository;
     }
 
     /**
@@ -85,7 +114,17 @@ public class NoteService {
     @Transactional(readOnly = true)
     public Page<NoteDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Notes");
-        return noteRepository.findAll(pageable).map(noteMapper::toDto);
+        Page<NoteDTO> pndto = noteRepository.findAll(pageable).map(noteMapper::toDto);
+
+        for (int i = 0; i < pndto.getSize(); i++) pndto.forEach(e -> {
+            Optional<ExamenDTO> exdto = this.examenRepository.findById(e.getExamen().getId()).map(examenMapper::toDto);
+            e.setExamen(exdto.get());
+
+            Optional<EleveDTO> edto = this.eleveRepository.findById(e.getEleve().getId()).map(eleveMapper::toDto);
+            e.setEleve(edto.get());
+        });
+
+        return pndto;
     }
 
     /**

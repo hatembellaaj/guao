@@ -1,8 +1,14 @@
 package com.guao.manager.service;
 
 import com.guao.manager.domain.Inscrption;
+import com.guao.manager.repository.ClasseRepository;
 import com.guao.manager.repository.InscrptionRepository;
+import com.guao.manager.repository.MatiereRepository;
+import com.guao.manager.service.dto.ClasseDTO;
 import com.guao.manager.service.dto.InscrptionDTO;
+import com.guao.manager.service.dto.MatiereDTO;
+import com.guao.manager.service.mapper.ClasseMapper;
+import com.guao.manager.service.mapper.ExamenMapper;
 import com.guao.manager.service.mapper.InscrptionMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -25,9 +31,20 @@ public class InscrptionService {
 
     private final InscrptionMapper inscrptionMapper;
 
-    public InscrptionService(InscrptionRepository inscrptionRepository, InscrptionMapper inscrptionMapper) {
+    private final ClasseRepository classeRepository;
+
+    private final ClasseMapper classeMapper;
+
+    public InscrptionService(
+        InscrptionRepository inscrptionRepository,
+        ClasseRepository classeRepository,
+        ClasseMapper classeMapper,
+        InscrptionMapper inscrptionMapper
+    ) {
         this.inscrptionRepository = inscrptionRepository;
         this.inscrptionMapper = inscrptionMapper;
+        this.classeRepository = classeRepository;
+        this.classeMapper = classeMapper;
     }
 
     /**
@@ -85,7 +102,13 @@ public class InscrptionService {
     @Transactional(readOnly = true)
     public Page<InscrptionDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Inscrptions");
-        return inscrptionRepository.findAll(pageable).map(inscrptionMapper::toDto);
+        Page<InscrptionDTO> pidto = inscrptionRepository.findAll(pageable).map(inscrptionMapper::toDto);
+        for (int i = 0; i < pidto.getSize(); i++) pidto.forEach(e -> {
+            Optional<ClasseDTO> cdto = this.classeRepository.findById(e.getClasse().getId()).map(classeMapper::toDto);
+            e.setClasse(cdto.get());
+        });
+
+        return pidto;
     }
 
     /**

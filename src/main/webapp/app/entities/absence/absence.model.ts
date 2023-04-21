@@ -6,7 +6,7 @@ export interface IAbsence {
   dateabsence?: dayjs.Dayjs | null;
   justifie?: boolean | null;
   commentaire?: string | null;
-  eleve?: Pick<IEleve, 'id'> | null;
+  eleve?: IEleve | null;
 }
 
 export type NewAbsence = Omit<IAbsence, 'id'> & { id: null };

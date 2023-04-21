@@ -75,7 +75,7 @@
           <td>{{ absence.commentaire }}</td>
           <td>
             <div *ngIf="absence.eleve">
-              <a [routerLink]="['/eleve', absence.eleve.id, 'view']">{{ absence.eleve.id }}</a>
+              <a [routerLink]="['/eleve', absence.eleve.id, 'view']">{{ absence.eleve.nom }}</a>
             </div>
           </td>
           <td class="text-end">
