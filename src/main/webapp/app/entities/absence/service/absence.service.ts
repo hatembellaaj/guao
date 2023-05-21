@@ -40,10 +40,12 @@ export class AbsenceService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getCountAbscenceJustifie() {
     return this.http.get<number>(`${this.resourceUrlCountJustifie}`);
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getCountAbscence() {
     return this.http.get<number>(`${this.resourceUrlCount}`);
   }

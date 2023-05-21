@@ -34,7 +34,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mariadb://localhost:3306/guaodb?allowPublicKeyRetrieval=true&useSSL=False
     username: root
-    password:
+    password: lbeina
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -47,11 +47,14 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev
+
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.sendgrid.net
+    port: 587
+    username: apikey
+    password: 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
+    protocol: smtp
+
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
