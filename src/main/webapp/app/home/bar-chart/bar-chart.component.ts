@@ -8,26 +8,31 @@ import Chart from 'chart.js/auto';
 })
 export class BarChartComponent implements OnInit {
   public chart: any;
-  public countAbscence: number = 0;
-  public countAbscenceJustifiees: number = 0;
+  public countAbscence = 0;
+  public countAbscenceJustifiees = 0;
   public abscenceData: number[] = [0, 0];
 
   ngOnInit(): void {
-    this.absenceService.getCountAbscence().forEach(a => {
+    this.absenceService.getCountAbscence().subscribe(a => {
+      // eslint-disable-next-line no-console
       console.log('all=', a);
       this.countAbscence = a;
     });
-    this.absenceService.getCountAbscenceJustifie().forEach(a => {
+    this.absenceService.getCountAbscenceJustifie().subscribe(a => {
+      // eslint-disable-next-line no-console
       console.log('justifie=', a);
       this.countAbscenceJustifiees = a;
-    });
-    this.abscenceData[0] = this.countAbscenceJustifiees;
-    this.abscenceData[1] = this.countAbscence - this.countAbscenceJustifiees;
+      this.abscenceData[0] = this.countAbscenceJustifiees;
+      this.abscenceData[1] = this.countAbscence - this.countAbscenceJustifiees;
 
-    this.createChart();
+      this.createChart();
+    });
+
+    // eslint-disable-next-line no-console
     console.log('absecence array : ', this.abscenceData);
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor(protected absenceService: AbsenceService) {}
 
   createChart(): void {
