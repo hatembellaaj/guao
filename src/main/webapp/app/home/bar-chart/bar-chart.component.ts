@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbsenceService } from 'app/entities/absence/service/absence.service';
 import Chart from 'chart.js/auto';
 @Component({
   selector: 'jhi-bar-chart',
@@ -7,28 +8,31 @@ import Chart from 'chart.js/auto';
 })
 export class BarChartComponent implements OnInit {
   public chart: any;
+  public countAbscence: number = 0;
+  public countAbscenceJustifiees: number = 0;
 
   ngOnInit(): void {
+    this.absenceService.getCountAbscence().forEach(a => {
+      this.countAbscence = a;
+    });
+    this.absenceService.getCountAbscenceJustifie().forEach(a => {
+      this.countAbscenceJustifiees = a;
+    });
     this.createChart();
   }
 
+  constructor(protected absenceService: AbsenceService) {}
+
   createChart(): void {
     this.chart = new Chart('MyChart', {
-      type: 'bar', //this denotes tha type of chart
+      type: 'pie', //this denotes tha type of chart
 
       data: {
         // values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12', '2022-05-13', '2022-05-14', '2022-05-15', '2022-05-16', '2022-05-17'],
+        labels: ['Abscence justifiées', 'Abscence non justifiées'],
         datasets: [
           {
-            label: 'Matiere',
-            data: ['467', '576', '572', '79', '92', '574', '573', '576'],
-            backgroundColor: 'blue',
-          },
-          {
-            label: 'Absence',
-            data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
-            backgroundColor: 'limegreen',
+            data: [this.countAbscenceJustifiees, this.countAbscence],
           },
         ],
       },

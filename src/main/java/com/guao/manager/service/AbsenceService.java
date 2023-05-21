@@ -132,4 +132,12 @@ public class AbsenceService {
         log.debug("Request to delete Absence : {}", id);
         absenceRepository.deleteById(id);
     }
+
+    public Long countJustifie() {
+        return absenceRepository.countAbscenceJustifiee();
+    }
+
+    public Long countAll() {
+        return absenceRepository.count();
+    }
 }

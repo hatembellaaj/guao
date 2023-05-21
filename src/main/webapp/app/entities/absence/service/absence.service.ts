@@ -28,6 +28,8 @@ export type EntityArrayResponseType = HttpResponse<IAbsence[]>;
 @Injectable({ providedIn: 'root' })
 export class AbsenceService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/absences');
+  protected resourceUrlCountJustifie = this.applicationConfigService.getEndpointFor('api/absencesjustifiees');
+  protected resourceUrlCount = this.applicationConfigService.getEndpointFor('api/absencescount');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -36,6 +38,14 @@ export class AbsenceService {
     return this.http
       .post<RestAbsence>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
+  }
+
+  getCountAbscenceJustifie() {
+    return this.http.get<number>(`${this.resourceUrlCountJustifie}`);
+  }
+
+  getCountAbscence() {
+    return this.http.get<number>(`${this.resourceUrlCount}`);
   }
 
   update(absence: IAbsence): Observable<EntityResponseType> {

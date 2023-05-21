@@ -180,4 +180,14 @@ public class AbsenceResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/absencescount")
+    public Long getAbsenceCount() {
+        return absenceService.countAll();
+    }
+
+    @GetMapping("/absencesjustifiees")
+    public Long getAbsenceCountJustifie() {
+        return absenceService.countJustifie();
+    }
 }
