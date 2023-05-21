@@ -10,15 +10,22 @@ export class BarChartComponent implements OnInit {
   public chart: any;
   public countAbscence: number = 0;
   public countAbscenceJustifiees: number = 0;
+  public abscenceData: number[] = [0, 0];
 
   ngOnInit(): void {
     this.absenceService.getCountAbscence().forEach(a => {
+      console.log('all=', a);
       this.countAbscence = a;
     });
     this.absenceService.getCountAbscenceJustifie().forEach(a => {
+      console.log('justifie=', a);
       this.countAbscenceJustifiees = a;
     });
+    this.abscenceData[0] = this.countAbscenceJustifiees;
+    this.abscenceData[1] = this.countAbscence - this.countAbscenceJustifiees;
+
     this.createChart();
+    console.log('absecence array : ', this.abscenceData);
   }
 
   constructor(protected absenceService: AbsenceService) {}
@@ -32,7 +39,7 @@ export class BarChartComponent implements OnInit {
         labels: ['Abscence justifiées', 'Abscence non justifiées'],
         datasets: [
           {
-            data: [this.countAbscenceJustifiees, this.countAbscence],
+            data: this.abscenceData,
           },
         ],
       },
