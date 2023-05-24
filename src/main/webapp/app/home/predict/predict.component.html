@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <h3 class="text-center my-4">Predict Success:</h3>
+    <form [formGroup]="predictSearchForm" (ngSubmit)="predict(predictSearchForm.value)">
+      <div class="form-group">
+        <input class="form-control" type="text" id="math" aria-describedby="math" placeholder="Math" formControlName="math" />
+        <br />
+        <input
+          class="form-control"
+          type="text"
+          id="physique"
+          aria-describedby="physique"
+          placeholder="Physique"
+          formControlName="physique"
+        />
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-md">Predict Success</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h3 class="text-center my-4">Result:</h3>
+    <p class="text-center">
+      {{ this.predictData }}
+    </p>
+  </div>
+</div>

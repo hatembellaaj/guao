@@ -6,9 +6,10 @@ import { HOME_ROUTE } from './home.route';
 import { HomeComponent } from './home.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { PiechartComponent } from './piechart/piechart.component';
+import { PredictComponent } from './predict/predict.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([HOME_ROUTE])],
-  declarations: [HomeComponent, BarChartComponent, PiechartComponent],
+  declarations: [HomeComponent, BarChartComponent, PiechartComponent, PredictComponent],
 })
 export class HomeModule {}
