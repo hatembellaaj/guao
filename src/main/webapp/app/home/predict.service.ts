@@ -10,6 +10,6 @@ export class PredictService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   predict(math: any, physique: any) {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    return this.http.get('http://localhost:5000/predict?math=' + math + '&physique=' + physique);
+    return this.http.get('http://127.0.0.1:5000/predict?math=' + math + '&physique=' + physique);
   }
 }

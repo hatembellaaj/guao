@@ -14,7 +14,8 @@ export class PredictComponent implements OnInit {
 
   ngOnInit(): void {
     this.predictSearchForm = this.formBuilder.group({
-      location: [''],
+      math: [''],
+      physique: [''],
     });
   }
 
